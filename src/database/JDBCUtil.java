@@ -12,7 +12,7 @@ import model.Student;
 
 
 public class JDBCUtil {
-	private static final String url = "jdbc:sqlserver://192.168.1.11:1433;databaseName=PoolManagement;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
+	private static final String url = "jdbc:sqlserver://JASMINE:1433;databaseName=PoolManagement;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
 
 	/*
 	 * Get connection

@@ -4,23 +4,18 @@ import java.util.ArrayList;
 
 public class Course {
 	private String courseID;
-	private String name;
-	private String detail;
-	private String pictureURL;
-	private Integer duration;
+	private String description;
+	private Integer levels;
 	private Double price;
-	private ArrayList<String> carousel;
+	private String pictureURL;
 	
-	public Course(String courseID, String name, String detail, String pictureURL, Integer duration, Double price,
-			ArrayList<String> carousel) {
+	public Course(String courseID, String description, Integer levels, Double price, String pictureURL) {
 		super();
 		this.courseID = courseID;
-		this.name = name;
-		this.detail = detail;
-		this.pictureURL = pictureURL;
-		this.duration = duration;
+		this.description = description;
+		this.levels = levels;
 		this.price = price;
-		this.carousel = carousel;
+		this.pictureURL = pictureURL;
 	}
 
 	public String getCourseID() {
@@ -31,36 +26,20 @@ public class Course {
 		this.courseID = courseID;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getDetail() {
-		return detail;
+	public Integer getLevels() {
+		return levels;
 	}
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-
-	public String getPictureURL() {
-		return pictureURL;
-	}
-
-	public void setPictureURL(String pictureURL) {
-		this.pictureURL = pictureURL;
-	}
-
-	public Integer getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Integer duration) {
-		this.duration = duration;
+	public void setLevels(Integer levels) {
+		this.levels = levels;
 	}
 
 	public Double getPrice() {
@@ -71,11 +50,11 @@ public class Course {
 		this.price = price;
 	}
 
-	public ArrayList<String> getCarousel() {
-		return carousel;
+	public String getPictureURL() {
+		return pictureURL;
 	}
 
-	public void setCarousel(ArrayList<String> carousel) {
-		this.carousel = carousel;
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
 	}
 }
