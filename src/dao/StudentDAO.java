@@ -1,10 +1,14 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import database.JDBCUtil;
+import enums.Gender;
+import enums.StudentType;
 import model.Student;
 
 public class StudentDAO implements DAOInterface<Student>{
@@ -123,13 +127,82 @@ public class StudentDAO implements DAOInterface<Student>{
 	}
 
 	public ArrayList<Student> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		int size = 0;
+		ArrayList<Student> studentArrayList = new ArrayList<Student>();
+		try {
+			Connection c = JDBCUtil.getConnection();
+			Statement st = JDBCUtil.getStatement(c);
+			
+			String queryString = "SELECT * from Students";
+			
+			System.out.println(queryString);
+			
+			ResultSet rs = st.executeQuery(queryString);
+			while (rs.next()) {
+				size++;
+				String userID = rs.getString("UserID");
+				String firstName = rs.getString("FirstName");
+				String lastName = rs.getString("LastName");
+				String email = rs.getString("Email");
+				String password = rs.getString("Password");
+				String address = rs.getString("Address");
+				String pictureURL = rs.getString("PictureURL");
+				LocalDate createDate = rs.getDate("CreateDate").toLocalDate();
+				LocalDate dateOfBirth = rs.getDate("DateOfBirth").toLocalDate();
+				Boolean isActive = rs.getBoolean("IsActive");
+				StudentType type = StudentType.valueOf(rs.getString("Type"));
+				Gender gender = Gender.valueOf(rs.getString("Gender"));
+				
+				Student student = new Student(userID, firstName, lastName, email, password, address, pictureURL, createDate, dateOfBirth, isActive, type, gender);
+				studentArrayList.add(student);
+			}
+			
+			System.out.println("Select " + size + (size > 1?" rows":" row") + " successfully.");
+			
+			JDBCUtil.closeConnection(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return studentArrayList;
 	}
 
 	public Student selectByID(Student t) {
-		// TODO Auto-generated method stub
-		return null;
+		Student student = null;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			Statement st = JDBCUtil.getStatement(c);
+			
+			String queryString = "SELECT * from Students WHERE UserID = '"+ t.getUserID() +"'";
+			
+			System.out.println(queryString);
+			
+			ResultSet rs = st.executeQuery(queryString);
+			while (rs.next()) {
+				String userID = rs.getString("UserID");
+				String firstName = rs.getString("FirstName");
+				String lastName = rs.getString("LastName");
+				String email = rs.getString("Email");
+				String password = rs.getString("Password");
+				String address = rs.getString("Address");
+				String pictureURL = rs.getString("PictureURL");
+				LocalDate createDate = rs.getDate("CreateDate").toLocalDate();
+				LocalDate dateOfBirth = rs.getDate("DateOfBirth").toLocalDate();
+				Boolean isActive = rs.getBoolean("IsActive");
+				StudentType type = StudentType.valueOf(rs.getString("Type"));
+				Gender gender = Gender.valueOf(rs.getString("Gender"));
+				
+				student = new Student(userID, firstName, lastName, email, password, address, pictureURL, createDate, dateOfBirth, isActive, type, gender);
+			}
+			
+			System.out.println("Successfully.");
+			
+			JDBCUtil.closeConnection(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return student;
 	}
 
 	public Student selectByCondition(String condition) {

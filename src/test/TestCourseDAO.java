@@ -1,7 +1,5 @@
 package test;
 
-import java.time.LocalDate;
-
 import dao.CourseDAO;
 import dao.StudentDAO;
 import enums.Gender;
@@ -13,7 +11,6 @@ public class TestCourseDAO {
 	public static void main(String[] args) {
 		// Test Insert
 		Course c1 = new Course("0000000001", "Safe Entry into Pool", 1, 2000000.0, "https://ui-avatars.com/api/?name=SP");
-
 		System.out.println(c1.toString());
 		CourseDAO.getInstance().insert(c1);
 
