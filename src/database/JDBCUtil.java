@@ -76,36 +76,4 @@ public class JDBCUtil {
 		}
 		return st;
 	}
-	
-	/*
-	 * Insert new Student object
-	 */
-	public static String insertNewStudent(Student s, Connection c) {
-		if (c != null) {
-			Statement st = null;
-			try {
-				st = c.createStatement();
-				String queryString = "INSERT INTO Students(UserID, FirstName, LastName, Email, Gender, Password) VALUES('"
-				+s.getUserID()
-				+"','"
-				+s.getFirstName()
-				+"','"
-				+s.getLastName()
-				+"','"
-				+s.getEmail()
-				+"','"
-				+s.getGender()
-				+"','"
-				+s.getPassword()
-				+"')";
-				System.out.println(queryString);
-				st.executeUpdate(queryString);
-				return "Successfully";
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return "Failed";
-	}
 }

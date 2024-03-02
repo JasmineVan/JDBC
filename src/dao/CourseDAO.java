@@ -1,11 +1,16 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import database.JDBCUtil;
+import enums.Gender;
+import enums.StudentType;
 import model.Course;
+import model.Student;
 
 public class CourseDAO implements DAOInterface<Course>{
 
@@ -107,8 +112,34 @@ public class CourseDAO implements DAOInterface<Course>{
 	}
 
 	public Course selectByID(Course t) {
-		// TODO Auto-generated method stub
-		return null;
+		Course course = null;
+		try {
+			Connection c = JDBCUtil.getConnection();
+			Statement st = JDBCUtil.getStatement(c);
+			
+			String queryString = "SELECT * from Courses WHERE CourseID = '"+ t.getCourseID() +"'";
+			
+			System.out.println(queryString);
+			
+			ResultSet rs = st.executeQuery(queryString);
+			while (rs.next()) {
+				String courseID = rs.getString("UserID");
+				String description = rs.getString("Description");
+				Integer levels = rs.getInt("Levels");
+				Double price = rs.getDouble("Price");
+				String pictureURL = rs.getString("PictureURL");
+				
+				course = new Course(courseID, description, levels, price, pictureURL);
+			}
+			
+			System.out.println("Successfully.");
+			
+			JDBCUtil.closeConnection(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return course;
 	}
 
 	public Course selectByCondition(String condition) {

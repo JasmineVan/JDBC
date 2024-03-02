@@ -35,10 +35,11 @@ public class TestStudentDAO {
 		
 		// Test SelectAll
 		ArrayList<Student> studentArrayList = StudentDAO.getInstance().selectAll();
-		for (Student student : studentArrayList) {
-			System.out.println(student.toString());
+		if (studentArrayList != null) {
+			for (Student student : studentArrayList) {
+				System.out.println(student.toString());
+			} 
 		}
-		
 		// Test SelectByID
 		Student s3 = new Student("0000000001", "Jasmine", "Van", "thuongtv@1cinnvation.com", "12345", "Long An",
 				"https://ui-avatars.com/api/?name=VT", LocalDate.now(), LocalDate.of(2000, 1, 20), true,
